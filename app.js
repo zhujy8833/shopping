@@ -10,7 +10,7 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
-
+var db = require('./db.js');
 // all environments
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
