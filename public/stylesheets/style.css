@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+/*new*/
+.form{
+    width: 172px;
+    height: auto;
+
+}
+
+.form label {
+    display: inline-block;
+    margin : 8px 0px;
+}
+
+.btn-group{
+    margin-top : 25px;
+}

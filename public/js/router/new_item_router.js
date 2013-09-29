@@ -1,7 +1,7 @@
-define(["backbone", ], function(Backbone){
+define(["backbone", "view/new_item"], function(Backbone, NewItemView){
     var MainRouter = Backbone.Router.extend({
         initialize : function(){
-
+            var router = this;
         },
 
         routes : {
@@ -10,9 +10,10 @@ define(["backbone", ], function(Backbone){
 
         index : function(){
             var router = this;
+            var newItemView = new NewItemView();
 
         }
     });
 
     return MainRouter;
-})
+});
