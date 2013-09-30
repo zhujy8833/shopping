@@ -40,7 +40,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items.mustache.html"],
                    for(var prop in attr){
                        obj[prop] = attr[prop];
                    }
-                   obj.difference = obj.china_final_price - obj.china_price;
+                   obj.difference = (obj.china_final_price - obj.china_price).toFixed(2);
                    contents.items.push(obj);
                 });
 
