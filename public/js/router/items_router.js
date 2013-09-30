@@ -1,4 +1,4 @@
-define(["backbone"], function(Backbone){
+define(["backbone", "collection/items", "view/items_list"], function(Backbone, Items, ItemList){
     var ItemsRouter = Backbone.Router.extend({
         initialize : function(){
 
@@ -10,6 +10,13 @@ define(["backbone"], function(Backbone){
 
         index : function(){
             var router = this;
+            var items = new Items();
+            items.fetch({
+                success : function(items){
+                    new ItemList({collection : items});
+                }
+            })
+
 
         }
     });
