@@ -1,0 +1,52 @@
+<table border="1" align='center'>
+<tr class="header">
+    <th></th>
+    <th>Name</th>
+    <th>US Price</th>
+    <th>China Price</th>
+    <th>Final Price($)</th>
+    <th>Final price(￥)</th>
+    <th>Created On</th>
+    <th>Description</th>
+    <th>Price Difference</th>
+    <th></th>
+
+</tr>
+{{#items}}
+<tr class="list item" id="{{_id}}">
+    <td><input type="checkbox" class="select-box"/></td>
+    <td class="name">{{name}}</td>
+    <td class="us_price">${{us_price}}</td>
+    <td class="china_price">￥{{china_price}}</td>
+    <td class="us_final_price">${{us_final_price}}</td>
+    <td class="china_final_price">￥{{china_final_price}}</td>
+    <td class="created_on">{{created_on}}</td>
+    <td class="description">{{description}}</td>
+    <td class="diff">{{difference}}</td>
+    <td><button class="del_entry"><span>Delete</span></button></td>
+</tr>
+{{/items}}
+</table>
+<div class="btn-group inline-group">
+    <button id="delete-selected">
+        <span>Delete Selected</span>
+    </button>
+    <button id="select-all">
+        <span>Select All</span>
+    </button>
+</div>
+<div class="field overrides inline-group">
+
+        <label for="service-fee-input">Service Fee
+            <input type="text" data-field="service_fee" placeholder="custom service fee..." id="service-fee-input"/>%
+        </label>
+
+        <label for="tax-rate-input">Tax Rate
+            <input type="text" data-field="tax_rate" placeholder="custom tax rate..." id="tax-rate-input"/>%
+        </label>
+
+        <label for="exchange-input">Exchange Rate
+            <input type="text" data-field="exchange" placeholder="custom exchange rate..." id="exchange-input"/>%
+        </label>
+
+</div>

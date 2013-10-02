@@ -35,13 +35,30 @@ exports.new = function(req, res){
 
 exports.delete = function(req, res){
     var id = req.params.id;
-    console.log(req.params);
     Item.findByIdAndRemove(id, function(err, item){
         res.json({
             success: true,
             item : item
         });
     })
+}
+
+exports.multiDelete = function(req, res){
+    var ids = [];
+    var result;
+
+    if(req.body && req.body.ids){
+        ids = JSON.parse(req.body.ids);
+        for (var i = 0; i < ids.length ; i++) {
+            Item.findByIdAndRemove(ids[i]).exec();
+        }
+        result = true;
+    } else {
+        result = false;
+    }
+    res.json({
+        success : result
+    });
 }
 
 exports.index = function(req, res){

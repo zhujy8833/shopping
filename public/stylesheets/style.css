@@ -27,6 +27,15 @@ button:hover{
     margin-top : 25px;
 }
 
+.inline-group {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.overrides label {
+    margin-left : 30px;
+}
+
 table td {
     text-align: center;
 }

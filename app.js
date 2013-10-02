@@ -31,6 +31,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post("/items", item_routes.new);
 app.get("/items", item_routes.index);
+app.delete("/items", item_routes.multiDelete);
 app.delete("/items/:id", item_routes.delete);
 //app.get('/users', user.list);
 
