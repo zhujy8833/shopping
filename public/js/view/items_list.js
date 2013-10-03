@@ -67,17 +67,19 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                     ids.push($(ele).closest(".item").attr("id"));
                 });
                 if(ids.length > 0){
-                    $.ajax({
-                        type : "DELETE",
-                        url : "/items",
-                        data : { ids : JSON.stringify(ids)},
-                        success : function(res) {
-
-                            if(res.success){
-                                Backbone.history.loadUrl("items");
+                    if(confirm("Are you sure to delete these entries ?")){
+                        $.ajax({
+                            type : "DELETE",
+                            url : "/items",
+                            data : { ids : JSON.stringify(ids)},
+                            success : function(res) {
+                                if(res.success){
+                                    Backbone.history.loadUrl("items");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
 
             },
