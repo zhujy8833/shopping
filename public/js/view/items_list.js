@@ -1,13 +1,10 @@
 define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "mixin/item_config"],
     function(Backbone, $, Mustache, items_template, config){
         var cal_final_us = function(original, tax_rate, service_rate) {
-            tax_rate = tax_rate || 10;
-            service_rate = service_rate || 15;
             return original * (1 + tax_rate/100) * (1 + service_rate/100);
         };
 
         var cal_final_china = function(us, exchange) {
-            exchange = exchange || 6.2;
             return us * exchange;
         };
 
