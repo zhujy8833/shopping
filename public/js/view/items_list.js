@@ -99,12 +99,12 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
 
             populate_rates : function(){
                 var view = this;
-                var service_fee = sessionStorage.service_fee || config.service_fee,
-                    tax_rate = sessionStorage.tax_rate || config.tax_rate,
-                    exchange = sessionStorage.exchange || config.exchange;
-                view.$el.find("#service-fee-input").val(service_fee);
-                view.$el.find("#tax-rate-input").val(tax_rate);
-                view.$el.find("#exchange-input").val(exchange);
+                sessionStorage.service_fee = sessionStorage.service_fee || config.service_fee,
+                sessionStorage.tax_rate = sessionStorage.tax_rate || config.tax_rate,
+                sessionStorage.exchange = sessionStorage.exchange || config.exchange;
+                view.$el.find("#service-fee-input").val(sessionStorage.service_fee);
+                view.$el.find("#tax-rate-input").val(sessionStorage.tax_rate);
+                view.$el.find("#exchange-input").val(sessionStorage.exchange);
             },
 
             render : function(){
