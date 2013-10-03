@@ -11,6 +11,35 @@ button:hover{
     cursor: pointer;
     opacity: 0.8;
 }
+
+/*menu*/
+header{
+
+}
+
+header ul {
+    list-style: none;
+
+}
+
+header ul li{
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+header ul li:hover{
+    background-color: #4C8FFC;
+    cursor: pointer;
+}
+
+header ul li a{
+   text-decoration: none;
+}
+header ul li:hover a{
+    color : white;
+}
 /*new*/
 .form{
     width: 172px;
@@ -29,13 +58,40 @@ button:hover{
 
 .inline-group {
     display: inline-block;
-    margin-left: 40px;
+    /*margin-left: 40px;*/
 }
 
 .overrides label {
     margin-left : 30px;
 }
 
+/*list table*/
+table {
+    border-spacing: 1px;
+    border-collapse: collapse;
+}
+
+table th {
+    color : white;
+    background-color: #8C40C8;
+    padding : 8px 15px;
+}
 table td {
     text-align: center;
+}
+
+.del_entry {
+    opacity : 0.7;
+    background: #f85032; /* Old browsers */
+    background: -moz-linear-gradient(top, #f85032 0%, #f85032 49%, #f16f5c 50%, #f6290c 88%, #e73827 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f85032), color-stop(49%,#f85032), color-stop(50%,#f16f5c), color-stop(88%,#f6290c), color-stop(100%,#e73827)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f85032 0%,#f85032 49%,#f16f5c 50%,#f6290c 88%,#e73827 100%); /* Chrome10+,Safari5.1+ */
+}
+
+.del_entry:hover {
+    opacity : 1
+}
+
+.del_entry span{
+   color : white;
 }

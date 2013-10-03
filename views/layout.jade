@@ -1,8 +1,16 @@
 doctype 5
 html
   head
-    title= title
+    title Hehe
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header.header.top-menu
+      ul
+        li.menu-li
+            a(href="/") Home
+        li.menu-li
+            a(href="#items") View All Entries
+        li.menu-li
+            a(href="#new")  New Entry
     block content
     script(data-main="js/main", src="js/vendor/require.min.js")

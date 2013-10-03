@@ -18,7 +18,7 @@ define(["backbone", "jquery", "mustache", "text!templates/main.mustache.html"],
             },
             render : function(){
                 var view = this;
-                view.$el.html(Mustache.to_html(main_template));
+                //view.$el.html(Mustache.to_html(main_template));
             }
         });
 

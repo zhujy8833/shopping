@@ -17,12 +17,12 @@ var deepCopy = function(destination, source) {
 
 exports.new = function(req, res){
     var reqBody = req.body;
-    /*var attrs = {
+    var attrs = {
         us_final_price : (reqBody.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee)).toFixed(2),
         china_final_price : (reqBody.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee) * app_config.config.exchange).toFixed(2)
     };
     attrs = deepCopy(reqBody, attrs);
-    */
+
     var item = new Item(attrs);
     item.save(function(err, item){
        res.json({
