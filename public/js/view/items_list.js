@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html"],
-    function(Backbone, $, Mustache, items_template){
+define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "mixin/item_config"],
+    function(Backbone, $, Mustache, items_template, config){
         var cal_final_us = function(original, tax_rate, service_rate) {
             tax_rate = tax_rate || 10;
             service_rate = service_rate || 15;
@@ -99,9 +99,9 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
 
             populate_rates : function(){
                 var view = this;
-                var service_fee = sessionStorage.service_fee || 15,
-                    tax_rate = sessionStorage.tax_rate || 10,
-                    exchange = sessionStorage.exchange || 6.2;
+                var service_fee = sessionStorage.service_fee || config.service_fee,
+                    tax_rate = sessionStorage.tax_rate || config.tax_rate,
+                    exchange = sessionStorage.exchange || config.exchange;
                 view.$el.find("#service-fee-input").val(service_fee);
                 view.$el.find("#tax-rate-input").val(tax_rate);
                 view.$el.find("#exchange-input").val(exchange);
