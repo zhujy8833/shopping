@@ -102,9 +102,9 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 sessionStorage.service_fee = sessionStorage.service_fee || config.service_fee,
                 sessionStorage.tax_rate = sessionStorage.tax_rate || config.tax_rate,
                 sessionStorage.exchange = sessionStorage.exchange || config.exchange;
-                view.$el.find("#service-fee-input").val(sessionStorage.service_fee);
-                view.$el.find("#tax-rate-input").val(sessionStorage.tax_rate);
-                view.$el.find("#exchange-input").val(sessionStorage.exchange);
+                view.$el.find("#service-fee-input").val(sessionStorage.service_fee + "");
+                view.$el.find("#tax-rate-input").val(sessionStorage.tax_rate + "");
+                view.$el.find("#exchange-input").val(sessionStorage.exchange + "");
             },
 
             render : function(){
@@ -112,7 +112,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 var contents = {
                     items : []
                 };
-                view.populate_rates();
+
                 _.each(view.collection.models, function(model){
                    var attr = model.attributes;
                    var obj = {};
@@ -129,6 +129,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 });
 
                 view.$el.html(Mustache.render(items_template, contents));
+                view.populate_rates();
             }
         });
 
