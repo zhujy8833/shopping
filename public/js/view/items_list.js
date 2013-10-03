@@ -112,6 +112,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 var contents = {
                     items : []
                 };
+                view.populate_rates();
                 _.each(view.collection.models, function(model){
                    var attr = model.attributes;
                    var obj = {};
@@ -128,7 +129,6 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 });
 
                 view.$el.html(Mustache.render(items_template, contents));
-                view.populate_rates();
             }
         });
 
