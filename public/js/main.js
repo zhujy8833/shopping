@@ -12,7 +12,8 @@ require.config({
         "underscore": "vendor/underscore",
         "backbone": "vendor/backbone",
         "mustache": "vendor/mustache",
-        "text": "vendor/requirejs-text"
+        "text": "vendor/requirejs-text",
+        "moment": "vendor/moment"
     }
 
 

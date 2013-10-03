@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "mixin/item_config"],
-    function(Backbone, $, Mustache, items_template, config){
+define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "mixin/item_config", "moment"],
+    function(Backbone, $, Mustache, items_template, config, Moment){
         var cal_final_us = function(original, tax_rate, service_rate) {
             return original * (1 + tax_rate/100) * (1 + service_rate/100);
         };
@@ -119,6 +119,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                        obj[prop] = attr[prop];
                    }
                    //if(sessionStorage.service_fee) {
+                   obj.created_on = Moment(obj.created_on).format("MMM Do YYYY, H:mm:ss A")
                    obj.us_final_price = Number(cal_final_us(obj.us_price, sessionStorage.tax_rate, sessionStorage.service_fee)).toFixed(2);
                    //}
                    obj.china_final_price = Number(cal_final_china(obj.us_final_price, sessionStorage.exchange)).toFixed(2);
