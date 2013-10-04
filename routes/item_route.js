@@ -64,7 +64,7 @@ exports.multiDelete = function(req, res){
 
 exports.index = function(req, res){
     var query = {isArchived: false};
-    Item.find(query, function(err, items){
+    Item.find(query).sort({created_on : -1}).exec(function(err, items){
         res.json(items);
     });
 }

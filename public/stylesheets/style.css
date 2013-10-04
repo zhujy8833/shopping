@@ -61,8 +61,13 @@ header ul li:hover a{
     /*margin-left: 40px;*/
 }
 
+
 .overrides label {
     margin-left : 30px;
+}
+
+.overrides label input {
+    width : 2em;
 }
 
 /*list table*/
@@ -80,7 +85,7 @@ table td {
     text-align: center;
 }
 
-.del_entry {
+.delete_btn {
     opacity : 0.7;
     background: #f85032; /* Old browsers */
     background: -moz-linear-gradient(top, #f85032 0%, #f85032 49%, #f16f5c 50%, #f6290c 88%, #e73827 100%); /* FF3.6+ */
@@ -88,10 +93,26 @@ table td {
     background: -webkit-linear-gradient(top, #f85032 0%,#f85032 49%,#f16f5c 50%,#f6290c 88%,#e73827 100%); /* Chrome10+,Safari5.1+ */
 }
 
-.del_entry:hover {
-    opacity : 1
+.delete_btn:hover {
+    opacity : 1;
 }
 
-.del_entry span{
+.delete_btn span{
    color : white;
+}
+
+.general_btn {
+    opacity: 0.7;
+    background: rgb(109,179,242); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 51%, rgba(30,105,222,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(109,179,242,1)), color-stop(50%,rgba(84,163,238,1)), color-stop(51%,rgba(54,144,240,1)), color-stop(100%,rgba(30,105,222,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 51%,rgba(30,105,222,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+
+.general_btn:hover {
+    opacity: 1;
+}
+.general_btn span {
+    color: white;
+    text-transform: uppercase;
 }

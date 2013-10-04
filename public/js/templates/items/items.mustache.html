@@ -1,14 +1,14 @@
 <table border="1">
 <tr class="header">
     <th></th>
-    <th>Name</th>
-    <th>US Price</th>
-    <th>China Price</th>
-    <th>Final Price($)</th>
-    <th>Final price(￥)</th>
-    <th>Created On</th>
-    <th>Description</th>
-    <th>Price Difference</th>
+    <th class="sortable" data-field="name">Name</th>
+    <th class="sortable" data-field="us_price">US Price</th>
+    <th class="sortable" data-field="china_price">China Price</th>
+    <th class="sortable" data-field="us_final_price">Final Price($)</th>
+    <th class="sortable" data-field="china_final_price">Final price(￥)</th>
+    <th class="sortable" data-field="created_on">Created On</th>
+    <th class="sortable" data-field="desciption">Description</th>
+    <th class="sortable" data-field="difference">Price Difference</th>
     <th></th>
 
 </tr>
@@ -23,30 +23,30 @@
     <td class="created_on">{{created_on}}</td>
     <td class="description">{{description}}</td>
     <td class="diff">{{difference}}</td>
-    <td><button class="del_entry"><span>Delete</span></button></td>
+    <td><button class="del_entry delete_btn"><span>Delete</span></button></td>
 </tr>
 {{/items}}
 </table>
 <div class="btn-group inline-group">
-    <button id="delete-selected">
+    <button id="delete-selected" class="general_btn">
         <span>Delete Selected</span>
     </button>
-    <button id="select-all">
+    <button id="select-all" class="general_btn">
         <span>Select All</span>
     </button>
 </div>
 <div class="field overrides inline-group">
 
         <label for="service-fee-input">Service Fee
-            <input type="text" data-field="service_fee" placeholder="custom service fee..." id="service-fee-input"/>%
+            <input type="text" data-field="service_fee" placeholder="" id="service-fee-input"/> %
         </label>
 
         <label for="tax-rate-input">Tax Rate
-            <input type="text" data-field="tax_rate" placeholder="custom tax rate..." id="tax-rate-input"/>%
+            <input type="text" data-field="tax_rate" placeholder="" id="tax-rate-input"/> %
         </label>
 
         <label for="exchange-input">Exchange Rate
-            <input type="text" data-field="exchange" placeholder="custom exchange rate..." id="exchange-input"/>%
+            <input type="text" data-field="exchange" placeholder="" id="exchange-input"/> %
         </label>
 
 </div>

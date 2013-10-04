@@ -1,10 +1,13 @@
 define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "mixin/item_config", "moment"],
     function(Backbone, $, Mustache, items_template, config, Moment){
         var cal_final_us = function(original, tax_rate, service_rate) {
+            tax_rate = tax_rate || config.tax_rate;
+            service_rate = service_rate || config.service_fee;
             return original * (1 + tax_rate/100) * (1 + service_rate/100);
         };
 
         var cal_final_china = function(us, exchange) {
+            exchange = exchange || config.exchange;
             return us * exchange;
         };
 
@@ -24,7 +27,8 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                "click #delete-selected" : "delete_selected",
                "change #service-fee-input" : "update",
                "change #tax-rate-input" : "update",
-               "change #exchange-input" : "update"
+               "change #exchange-input" : "update",
+               "click .sortable" : "sort"
             },
 
             delete : function(e){
@@ -40,6 +44,11 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                     });
 
                 }
+            },
+
+            sort : function(e){
+                var view = this;
+
             },
 
             select_all : function(e){
@@ -123,8 +132,12 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                    obj.us_final_price = Number(cal_final_us(obj.us_price, sessionStorage.tax_rate, sessionStorage.service_fee)).toFixed(2);
                    //}
                    obj.china_final_price = Number(cal_final_china(obj.us_final_price, sessionStorage.exchange)).toFixed(2);
+                   if(!obj.china_price){
+                       obj.difference = "--";
+                   } else{
+                       obj.difference = (obj.china_final_price - obj.china_price).toFixed(2);
+                   }
 
-                   obj.difference = (obj.china_final_price - obj.china_price).toFixed(2);
                    contents.items.push(obj);
                 });
 
