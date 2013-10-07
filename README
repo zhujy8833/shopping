@@ -1,0 +1,10 @@
+![Codeship Status for zhujy8833/shopping](https://www.codeship.io/projects/334e53c0-1151-0131-1e09-1e83275d6e69/status?branch=master)
+
+Node App
+
+- Backend: Node.js
+- Frontend: Backbone.js
+- Database: MongoDB.
+
+- Deployment: Heroku
+
