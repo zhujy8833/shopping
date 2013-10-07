@@ -116,3 +116,18 @@ table td {
     color: white;
     text-transform: uppercase;
 }
+tr.list .general_btn{
+    width: 54px;
+}
+tr.list .general_btn span{
+    text-transform: none;
+}
+
+.hide{
+    display:none;
+}
+
+.inline-edit{
+    max-width: 7em;
+    text-overflow: ellipsis;
+}
