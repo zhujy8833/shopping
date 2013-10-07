@@ -83,6 +83,7 @@ table th {
 }
 table td {
     text-align: center;
+    max-width: 9em;
 }
 
 .delete_btn {
