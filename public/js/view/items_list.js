@@ -203,21 +203,6 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 _.each(view.collection.models, function(model){
                    var attr = model.attributes;
                    var obj = view.getCalculatedObj(attr);
-                   /*var obj = {};
-                   for(var prop in attr){
-                       obj[prop] = attr[prop];
-                   }
-                   //if(sessionStorage.service_fee) {
-                   obj.created_on = Moment(obj.created_on).format("MMM Do YYYY, H:mm:ss")
-                   obj.us_final_price = Number(cal_final_us(obj.us_price, sessionStorage.tax_rate, sessionStorage.service_fee)).toFixed(2);
-                   //}
-                   obj.china_final_price = Number(cal_final_china(obj.us_final_price, sessionStorage.exchange)).toFixed(2);
-                   if(!obj.china_price){
-                       obj.difference = "--";
-                   } else{
-                       obj.difference = (obj.china_final_price - obj.china_price).toFixed(2);
-                   }
-                   */
                    contents.items.push(obj);
                 });
 
