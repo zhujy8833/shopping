@@ -15,14 +15,28 @@ var deepCopy = function(destination, source) {
     return destination;
 };
 
+var getCalculatedObj = function(obj) {
+    var attrs = {
+        us_final_price : (obj.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee)).toFixed(2),
+        china_final_price : (obj.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee) * app_config.config.exchange).toFixed(2)
+    };
+    if(obj.us_price === undefined){
+        return obj;
+    }
+    attrs = deepCopy(obj, attrs);
+
+    return attrs;
+};
+
 exports.new = function(req, res){
     var reqBody = req.body;
-    var attrs = {
+    /*var attrs = {
         us_final_price : (reqBody.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee)).toFixed(2),
         china_final_price : (reqBody.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee) * app_config.config.exchange).toFixed(2)
     };
     attrs = deepCopy(reqBody, attrs);
-
+    */
+    var attrs = getCalculatedObj(reqBody);
     var item = new Item(attrs);
     item.save(function(err, item){
        res.json({
@@ -60,6 +74,21 @@ exports.multiDelete = function(req, res){
     res.json({
         success : result
     });
+}
+
+exports.update = function(req, res) {
+    var id = req.params.id;
+    var obj = req.body || {};
+    var updateObj = getCalculatedObj(obj);
+    delete updateObj._id;
+    delete updateObj.__v;
+    Item.findByIdAndUpdate(id, updateObj).exec(function(err, item){
+        if(err){
+
+        } else {
+            res.json(item);
+        }
+    })
 }
 
 exports.index = function(req, res){
