@@ -150,6 +150,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                     model.set($el.data("field"), value);
                     obj[$el.data("field")] = value;
                 });
+
                 if(model) {
                     model.save(obj, {
                         url : "/items/"+ id,
