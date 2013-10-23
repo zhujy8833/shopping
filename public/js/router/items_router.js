@@ -1,4 +1,4 @@
-define(["backbone", "collection/items", "model/item", "view/items_list"], function(Backbone, Items, Item, ItemList){
+define(["backbone", "collection/items", "view/items_list"], function(Backbone, Items, ItemList){
     var ItemsRouter = Backbone.Router.extend({
         initialize : function(){
 
@@ -15,10 +15,7 @@ define(["backbone", "collection/items", "model/item", "view/items_list"], functi
                 success : function(items){
                     new ItemList({collection : items});
                 }
-            })
-            //new ItemList();
-
-
+            });
         }
     });
 

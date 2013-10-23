@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "text!templates/items/item.row.mustache.html","mixin/item_config", "moment"],
-    function(Backbone, $, Mustache, items_template, row_template, config, Moment){
+define(["backbone", "jquery", "mustache", "text!templates/items/item.row.mustache.html","mixin/item_config", "moment"],
+    function(Backbone, $, Mustache, row_template, config, Moment){
         var cal_final_us = function(original, tax_rate, service_rate) {
             tax_rate = tax_rate || config.tax_rate;
             service_rate = service_rate || config.service_fee;

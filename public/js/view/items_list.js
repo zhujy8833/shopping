@@ -1,15 +1,5 @@
-define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/items/items.mustache.html", "text!templates/items/item.row.mustache.html","mixin/item_config", "moment"],
-    function(Backbone, $, Mustache, ItemSubView, items_template, row_template, config, Moment){
-        var cal_final_us = function(original, tax_rate, service_rate) {
-            tax_rate = tax_rate || config.tax_rate;
-            service_rate = service_rate || config.service_fee;
-            return original * (1 + tax_rate/100) * (1 + service_rate/100);
-        };
-
-        var cal_final_china = function(us, exchange) {
-            exchange = exchange || config.exchange;
-            return us * exchange;
-        };
+define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/items/items.mustache.html","mixin/item_config"],
+    function(Backbone, $, Mustache, ItemSubView, items_template, config){
 
         var ItemList = Backbone.View.extend({
             tagName: "div",
@@ -89,65 +79,6 @@ define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/
                     sessionStorage[field] = !!input.val().trim() ? Number(input.val()) : "";
                 }
                 Backbone.history.loadUrl("items");
-            },
-            edit_entry: function(e){
-                var view = this;
-                var $ele = $(e.currentTarget);
-                var row = $ele.closest(".list"),
-                    id = row.attr("id");
-                var update_btn = row.find(".update_entry");
-                var model = view.collection.get(id);
-                var editables = row.find("td.editable");
-                var input_template = "<input class='inline-edit' type='text' name='{{field}}' value='{{value}}'/>";
-                var populateField = function(fld, val) {
-                     var field = fld.data("field");
-                     fld.html(Mustache.render(input_template, {field : field, value : val}));
-                };
-                editables.each(function(i, ele){
-                    var value;
-                    var $ele = $(ele);
-                    value = model.get($ele.data("field"));
-                    populateField($ele, value);
-                });
-                //toggle update button
-                update_btn.removeClass("hide");
-                $ele.addClass("hide");
-            },
-
-            update_entry: function(e){
-                var view = this;
-                var $ele = $(e.currentTarget);
-                var row = $ele.closest(".list"),
-                    id = row.attr("id");
-                var edit_btn = row.find(".edit_entry");
-                var model = view.collection.get(id);
-                var editables = row.find("td.editable");
-                var obj = {};
-                _.each(editables, function(el){
-                    var $el = $(el);
-                    var value;
-                    if($el.hasClass("number")){
-                        value = Number($el.find(".inline-edit").val());
-                    } else {
-                        value = $el.find(".inline-edit").val();
-                    }
-                    model.set($el.data("field"), value);
-                    obj[$el.data("field")] = value;
-                });
-
-                if(model) {
-                    model.save(obj, {
-                        url : "/items/"+ id,
-                        success: function(res){
-                           var attrs = res.attributes;
-                           var obj = view.getCalculatedObj(attrs);
-                           row.html(Mustache.render(row_template, obj));
-                        }
-                    })
-                }
-                //toggle update button
-                $ele.addClass("hide");
-                edit_btn.removeClass("hide");
             },
 
             populate_rates : function(){
