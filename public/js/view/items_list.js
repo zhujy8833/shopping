@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.html", "text!templates/items/item.row.mustache.html","mixin/item_config", "moment"],
-    function(Backbone, $, Mustache, items_template, row_template, config, Moment){
+define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/items/items.mustache.html", "text!templates/items/item.row.mustache.html","mixin/item_config", "moment"],
+    function(Backbone, $, Mustache, ItemSubView, items_template, row_template, config, Moment){
         var cal_final_us = function(original, tax_rate, service_rate) {
             tax_rate = tax_rate || config.tax_rate;
             service_rate = service_rate || config.service_fee;
@@ -17,35 +17,21 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
             initialize : function() {
                 var view = this;
                 view.render();
-                $("#main").html(view.$el);
 
+                view.collection.each(function(item){
+                    var itemSubView = new ItemSubView({model: item});
+                    view.$el.find("table").append(itemSubView.$el);
+                });
 
             },
             events : {
-               "click .del_entry" : "delete",
                "click #select-all" : "select_all",
                "click #delete-selected" : "delete_selected",
                "change #service-fee-input" : "update",
                "change #tax-rate-input" : "update",
                "change #exchange-input" : "update",
-               "click .edit_entry" : "edit_entry",
-               "click .update_entry" : "update_entry",
+
                "click .sortable" : "sort"
-            },
-
-            delete : function(e){
-                var view = this;
-                var id = $(e.currentTarget).closest(".list").attr("id");
-                var model = view.collection.get(id);
-                if(confirm("Are you sure to delete "+model.get("name") + "?")){
-                    model.destroy({
-                        url : "items/"+id,
-                        success : function(model, res){
-                            Backbone.history.loadUrl("items");
-                        }
-                    });
-
-                }
             },
 
             sort : function(e){
@@ -103,8 +89,6 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                     sessionStorage[field] = !!input.val().trim() ? Number(input.val()) : "";
                 }
                 Backbone.history.loadUrl("items");
-                //return view;
-
             },
             edit_entry: function(e){
                 var view = this;
@@ -176,39 +160,12 @@ define(["backbone", "jquery", "mustache", "text!templates/items/items.mustache.h
                 view.$el.find("#exchange-input").val(sessionStorage.exchange + "");
             },
 
-            getCalculatedObj : function(o){
-                if(_.isEmpty(o)) return;
-                var obj = {};
-                for(var prop in o){
-                    obj[prop] = o[prop];
-                }
-                //if(sessionStorage.service_fee) {
-                obj.created_on = Moment(obj.created_on).format("MMM Do YYYY, H:mm:ss")
-                obj.us_final_price = Number(cal_final_us(obj.us_price, sessionStorage.tax_rate, sessionStorage.service_fee)).toFixed(2);
-                //}
-                obj.china_final_price = Number(cal_final_china(obj.us_final_price, sessionStorage.exchange)).toFixed(2);
-                if(!obj.china_price){
-                    obj.difference = "--";
-                } else{
-                    obj.difference = (obj.china_final_price - obj.china_price).toFixed(2);
-                }
-                return obj;
-            },
-
             render : function(){
                 var view = this;
-                var contents = {
-                    items : []
-                };
-
-                _.each(view.collection.models, function(model){
-                   var attr = model.attributes;
-                   var obj = view.getCalculatedObj(attr);
-                   contents.items.push(obj);
-                });
-
-                view.$el.html(Mustache.render(items_template, contents));
+                view.$el.html(items_template);
+                $("#main").html(view.$el);
                 view.populate_rates();
+                return view;
             }
         });
 
