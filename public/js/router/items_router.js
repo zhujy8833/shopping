@@ -15,9 +15,7 @@ define(["backbone", "collection/items", "view/items_list"], function(Backbone, I
                 success : function(items){
                     new ItemList({collection : items});
                 }
-            })
-
-
+            });
         }
     });
 
