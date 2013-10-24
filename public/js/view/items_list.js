@@ -6,13 +6,8 @@ define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/
             className : "item-list",
             initialize : function() {
                 var view = this;
+                view.collection.on("remove", view.render, view);
                 view.render();
-
-                view.collection.each(function(item){
-                    var itemSubView = new ItemSubView({model: item});
-                    view.$el.find("table").append(itemSubView.$el);
-                });
-
             },
             events : {
                "click #select-all" : "select_all",
@@ -50,8 +45,11 @@ define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/
             delete_selected : function(){
                 var view = this;
                 var ids = [];
+                var models = [];
                 view.$el.find("input.select-box:checked").each(function(i, ele){
-                    ids.push($(ele).closest(".item").attr("id"));
+                    var id = $(ele).closest(".list").data("id")
+                    ids.push(id);
+                    models.push(view.collection.get(id));
                 });
                 if(ids.length > 0){
                     if(confirm("Are you sure to delete these entries ?")){
@@ -60,9 +58,10 @@ define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/
                             url : "/items",
                             data : { ids : JSON.stringify(ids)},
                             success : function(res) {
-                                if(res.success){
+                                /*if(res.success){
                                     Backbone.history.loadUrl("items");
-                                }
+                                }*/
+                                view.collection.remove(models);
                             }
                         });
                     }
@@ -96,6 +95,10 @@ define(["backbone", "jquery", "mustache", "view/item_sub_view", "text!templates/
                 view.$el.html(items_template);
                 $("#main").html(view.$el);
                 view.populate_rates();
+                view.collection.each(function(item){
+                    var itemSubView = new ItemSubView({model: item});
+                    view.$el.find("table").append(itemSubView.$el);
+                });
                 return view;
             }
         });
