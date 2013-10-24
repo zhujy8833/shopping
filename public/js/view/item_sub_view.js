@@ -80,7 +80,7 @@ define(["backbone", "jquery", "mustache", "text!templates/items/item.row.mustach
 
                 if(model) {
                     model.save(obj, {
-                        url : "/items/"+ model.get("_id"),
+                        url : "/items/"+ model.get("_id")
                     });
                 }
                 //toggle update button
