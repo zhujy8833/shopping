@@ -27,7 +27,7 @@ define(["backbone", "model/item", "backbone.paginator"], function(Backbone, Item
 	      currentPage: 0,
 
 	      // how many items per page should be shown
-	      perPage: 5,
+	      perPage: 10,
 
 	      // a default number of total pages to query in case the API or
 	      // service you are using does not support providing the total
