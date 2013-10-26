@@ -92,8 +92,28 @@ exports.update = function(req, res) {
 }
 
 exports.index = function(req, res){
+    var criteria = req.query || {};
+
     var query = {isArchived: false};
-    Item.find(query).sort({created_on : -1}).exec(function(err, items){
+    var find = Item.find(query);/*.sort({created_on : -1}).exec(function(err, items){
+        res.json(items);
+    });*/
+    if(criteria.sort) {
+        var sortObj = {};
+        sortObj[criteria.sort] = -1;
+        find = find.sort(sortObj);
+    } else {
+        find.sort({created_on : -1});
+    }
+
+    if(criteria.skip) {
+        find = find.skip(Number(criteria.skip));
+    }
+    if(criteria.limit) {
+        find = find.limit(Number(criteria.limit));
+    }
+
+    find.exec(function(err, items){
         res.json(items);
     });
 }

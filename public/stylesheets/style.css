@@ -133,6 +133,21 @@ tr.list .general_btn span{
     text-transform: none;
 }
 
+#show_more { 
+    display: block;
+    text-align: center;
+    width: 81%;
+    padding: 10px;
+    font-size: 17px;
+    margin: 12px 68px;
+    opacity: 0.4;
+    -webkit-transition: opacity 0.5s linear;
+    border-radius: 3px;
+}
+
+#show_more:hover { 
+    opacity: 1;
+}
 .hide{
     display:none;
 }
