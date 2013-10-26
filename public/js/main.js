@@ -1,8 +1,11 @@
-require.config({
+ require.config({
     shim: {
         "backbone": {
             deps: ["underscore", "jquery"],
             exports: "Backbone"
+        },
+        "backbone.paginator" : {
+            deps: ["backbone"]
         }
     },
 
@@ -13,7 +16,8 @@ require.config({
         "backbone": "vendor/backbone",
         "mustache": "vendor/mustache",
         "text": "vendor/requirejs-text",
-        "moment": "vendor/moment"
+        "moment": "vendor/moment",
+        "backbone.paginator" : "vendor/backbone.paginator"
     }
 
 
