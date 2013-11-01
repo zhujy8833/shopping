@@ -17,6 +17,7 @@ var deepCopy = function(destination, source) {
 
 var getCalculatedObj = function(obj) {
     var attrs = {
+        us_after_tax : (obj.us_price * (1 + app_config.config.tax_rate)).toFixed(2),
         us_final_price : (obj.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee)).toFixed(2),
         china_final_price : (obj.us_price * (1 + app_config.config.tax_rate) * (1 + app_config.config.service_fee) * app_config.config.exchange).toFixed(2)
     };
